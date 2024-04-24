@@ -1,4 +1,4 @@
 FROM openjdk:8
 EXPOSE 8080
-ADD target/Harrypotter.jar Harrypotter.jar
-ENTRYPOINT ["java","-jar","/Harrypotter.jar"]
+ADD target/HarryPotter_Bookstore.jar HarryPotter_Bookstore.jar
+ENTRYPOINT ["java","-jar","/HarryPotter_Bookstore.jar"]
