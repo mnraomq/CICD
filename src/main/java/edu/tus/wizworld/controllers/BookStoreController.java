@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.constraints.Max;
-
 import edu.tus.wizworld.dao.BookRepository;
 import edu.tus.wizworld.dto.Book;
 import edu.tus.wizworld.dto.Rating;

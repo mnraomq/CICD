@@ -2,8 +2,6 @@ package edu.tus.wizworld.dao;
 
 import java.util.List;
 
-import javax.validation.constraints.Max;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
