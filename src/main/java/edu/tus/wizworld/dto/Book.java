@@ -4,9 +4,11 @@ import javax.persistence.*;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="books")
+@NoArgsConstructor
 @AllArgsConstructor
 public class Book {
 	@Id
