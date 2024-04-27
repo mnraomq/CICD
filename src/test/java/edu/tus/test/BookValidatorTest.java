@@ -29,7 +29,7 @@ public class BookValidatorTest {
 	@BeforeEach
 	void setUp() throws IOException {
 		MockitoAnnotations.openMocks(this);
-		mockBook = new Book(100L, "Title", "Author", "IllustratedBy", 10.25, 15.25, "Image", "Series", Rating.CLASSIC);
+		mockBook = new Book(100L, "Book-1", "Nagesh", "Rao", 10.25, 15.25, "Image1.png", "Series", Rating.CLASSIC);
 	}
 
 	private Book mockBook;
@@ -41,7 +41,7 @@ public class BookValidatorTest {
 
 	@Test
 	public void checkEmptyFieldForTitleTest() {
-		mockBook = new Book(100L, "", "Author", "IllustratedBy", 10.25, 15.25, "Image", "Series", Rating.CLASSIC);
+		mockBook = new Book(100L, "", "Macharla", "mnrao", 10.25, 15.25, "Image2.png", "Comics", Rating.CLASSIC);
 		Throwable ex = assertThrows(BookValidationException.class, () ->
 			bookValidator.validateBook(mockBook)
 		);
