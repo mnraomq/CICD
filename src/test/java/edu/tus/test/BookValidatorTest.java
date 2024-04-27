@@ -42,18 +42,18 @@ public class BookValidatorTest {
 	@Test
 	public void checkEmptyFieldsTest() {
 		mockBook = new Book(100L, "", "Author", "IllustratedBy", 10.25, 15.25, "Image", "Series", Rating.CLASSIC);
-		Throwable ex = assertThrows(BookValidationException.class, () -> {
-			bookValidator.validateBook(mockBook);
-		});
+		Throwable ex = assertThrows(BookValidationException.class, () ->
+			bookValidator.validateBook(mockBook)
+		);
 		assertEquals(ErrorMessages.EMPTY_FIELDS.getMsg(), ex.getMessage());
 	}
 
 	@Test
 	public void checkIfTitleAlreadyExistsTest() {
 		when(bookRepo.findByTitle(mockBook.getTitle())).thenReturn(mockBook);
-		Throwable ex = assertThrows(BookValidationException.class, () -> {
-			bookValidator.validateBook(mockBook);
-		});
+		Throwable ex = assertThrows(BookValidationException.class, () ->
+			bookValidator.validateBook(mockBook)
+		);
 		assertEquals(ErrorMessages.ALREADY_EXISTS.getMsg(), ex.getMessage());
 	}
 }
