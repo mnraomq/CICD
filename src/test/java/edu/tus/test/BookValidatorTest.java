@@ -40,8 +40,17 @@ public class BookValidatorTest {
 	}
 
 	@Test
-	public void checkEmptyFieldsTest() {
+	public void checkEmptyFieldForTitleTest() {
 		mockBook = new Book(100L, "", "Author", "IllustratedBy", 10.25, 15.25, "Image", "Series", Rating.CLASSIC);
+		Throwable ex = assertThrows(BookValidationException.class, () ->
+			bookValidator.validateBook(mockBook)
+		);
+		assertEquals(ErrorMessages.EMPTY_FIELDS.getMsg(), ex.getMessage());
+	}
+	
+	@Test
+	public void checkEmptyFieldForSeriesTest() {
+		mockBook = new Book(100L, "Title", "Author", "IllustratedBy", 10.25, 15.25, "Image", "", Rating.CLASSIC);
 		Throwable ex = assertThrows(BookValidationException.class, () ->
 			bookValidator.validateBook(mockBook)
 		);
