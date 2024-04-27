@@ -1,4 +1,4 @@
-package edu.tus.test;
+package edu.tus.wizworld;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
