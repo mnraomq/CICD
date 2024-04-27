@@ -1,4 +1,4 @@
-package edu.tus.wizworld;
+package edu.tus.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
