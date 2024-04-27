@@ -17,7 +17,6 @@ import lombok.Setter;
 @Table(name = "books")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
 public class Book {
 	@Id
@@ -33,4 +32,33 @@ public class Book {
 	private String series;
 	@Enumerated(EnumType.STRING)
 	private Rating rating;
+	public Long getId() {
+		return id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public String getIllustratedBy() {
+		return illustratedBy;
+	}
+	public double getRealRetailPrice() {
+		return realRetailPrice;
+	}
+	public double getOnlinePrice() {
+		return onlinePrice;
+	}
+	public String getImage() {
+		return image;
+	}
+	public String getSeries() {
+		return series;
+	}
+	public Rating getRating() {
+		return rating;
+	}
+	
+	
 }

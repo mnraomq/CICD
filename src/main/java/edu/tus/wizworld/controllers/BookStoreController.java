@@ -59,7 +59,6 @@ public class BookStoreController {
 			return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
 		}
 		catch(BookException e) {
-			System.out.println(e.getMessage());
 			ErrorMessage errorMessage=new ErrorMessage(e.getMessage());
 			return ResponseEntity.badRequest().body(errorMessage);
 		}

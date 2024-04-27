@@ -1,13 +1,13 @@
 package edu.tus.wizworld.errors;
 
 public class ErrorMessage {
-	String errorMessage;
+	String error;
 
 	public ErrorMessage(String message) {
-		this.errorMessage = message;
+		this.error = message;
 	}
 
 	public String getErrorMessage() {
-		return errorMessage;
+		return error;
 	}
 }

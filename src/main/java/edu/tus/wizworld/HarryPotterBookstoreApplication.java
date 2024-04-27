@@ -9,6 +9,5 @@ public class HarryPotterBookstoreApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HarryPotterBookstoreApplication.class, args);
-		System.out.print("Harry Potter Book Store - Server Running");		
 	}
 }
