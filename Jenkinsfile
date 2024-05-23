@@ -83,7 +83,7 @@ pipeline {
                             git config user.name "${GIT_USER_NAME}"
                             sed -i.bak 's/replaceImageTag/${buildNumber}/g' argo/deployment.yml
                             rm argo/deployment.yml.bak
-                            git add argo/deployment.yml
+                            git add .scannerwork/
                             git commit -m "Update deployment image to version ${buildNumber}"
                             git push https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                         """
