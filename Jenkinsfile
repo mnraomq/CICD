@@ -73,7 +73,7 @@ pipeline {
                 GIT_USER_EMAIL = "mnraomq@gmail.com"
             }
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: 'github', variable: 'github-token')]) {
                     script {
                         def buildNumber = env.BUILD_NUMBER
                         sh """
@@ -83,7 +83,7 @@ pipeline {
                             rm ${GIT_REPO_NAME}/argo/deployment.yml.bak
                             git add ${GIT_REPO_NAME}/argo/deployment.yml
                             git commit -m "Update deployment image to version ${buildNumber}"
-                            git push https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                            git push https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                         """
                     }
                 }
