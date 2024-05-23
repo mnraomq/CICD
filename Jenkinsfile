@@ -78,9 +78,9 @@ pipeline {
                     sh """
                         git config user.email "${GIT_USER_EMAIL}"
                         git config user.name "${GIT_USER_NAME}"
-                        sed -i 's/replaceImageTag/${BUILD_NUMBER}/g' ${GIT_REPO_NAME}/argo/deployment.yml
+                        sed -i 's/replaceImageTag/${buildNumber}/g' ${GIT_REPO_NAME}/argo/deployment.yml
                         git add ${GIT_REPO_NAME}/argo/deployment.yml
-                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git commit -m "Update deployment image to version ${buildNumber}"
                         git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                     """
                 }
