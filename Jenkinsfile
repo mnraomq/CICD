@@ -71,7 +71,7 @@ pipeline {
         }
         stage('Update Deployment File') {
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {  // Ensure 'github' matches the credentials ID in Jenkins
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     script {
                         echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
                         echo "GIT_USER_NAME: ${GIT_USER_NAME}"
