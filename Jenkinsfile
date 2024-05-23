@@ -72,9 +72,14 @@ pipeline {
                 GIT_USER_NAME = "mnraomq"
                 GIT_USER_EMAIL = "mnraomq@gmail.com"
             }
+            stage('Update Deployment File') {
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'github-token')]) {
+                withCredentials([string(credentialsId: 'github', variable: 'github-token')]) {  // Ensure 'github' matches the credentials ID in Jenkins
                     script {
+                        echo "GITHUB_TOKEN: ${github-token}"
+                        echo "GIT_USER_NAME: ${GIT_USER_NAME}"
+                        echo "GIT_USER_EMAIL: ${GIT_USER_EMAIL}"
+                        
                         def buildNumber = env.BUILD_NUMBER
                         sh """
                             git config user.email "${GIT_USER_EMAIL}"
@@ -85,6 +90,7 @@ pipeline {
                             git commit -m "Update deployment image to version ${buildNumber}"
                             git push https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                         """
+                        }
                     }
                 }
             }
