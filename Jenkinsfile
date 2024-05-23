@@ -67,21 +67,24 @@ pipeline {
             }
         }
         stage('Update Deployment File') {
-        environment {
-            GIT_REPO_NAME = "CICD"
-            GIT_USER_NAME = "mnraomq"
-        }
-        steps {
-                sh '''
-                    git config user.email "mnraomq@gmail.com"
-                    git config user.name "mnraomq"
-                    BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" CICD/argo/deployment.yml
-                    git add CICD/argo/deployment.yml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://github.com/mnraomq/CICD HEAD:master
+            environment {
+                GIT_REPO_NAME = "CICD"
+                GIT_USER_NAME = "mnraomq"
+                GIT_USER_EMAIL = "mnraomq@gmail.com"
+            }
+            steps {
+                script {
+                    def buildNumber = env.BUILD_NUMBER
+                    sh '''
+                        git config user.email "${GIT_USER_EMAIL}"
+                        git config user.name "${GIT_USER_NAME}"
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ${GIT_REPO_NAME}/argo/deployment.yml
+                        git add ${GIT_REPO_NAME}/argo/deployment.yml
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                     '''
-		}
-	}
+                }
+            }
+        }
     }
 }
