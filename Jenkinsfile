@@ -80,8 +80,8 @@ pipeline {
                     git add CICD/argo/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://github.com/mnraomq/CICD HEAD:master
-                '''
-			}
+                    '''
 		}
 	}
+    }
 }
