@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: bookstore
-        image: mnraomq/bookstore
+        image: mnraomq/bookstore:replaceImageTag
         ports:
         - containerPort: 8082
 
