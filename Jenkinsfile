@@ -73,17 +73,19 @@ pipeline {
                 GIT_USER_EMAIL = "mnraomq@gmail.com"
             }
             steps {
-                script {
-                    def buildNumber = env.BUILD_NUMBER
-                    sh """
-                        git config user.email "${GIT_USER_EMAIL}"
-                        git config user.name "${GIT_USER_NAME}"
-                        sed -i.bak 's/replaceImageTag/${buildNumber}/g' ${GIT_REPO_NAME}/argo/deployment.yml
-                        rm ${GIT_REPO_NAME}/argo/deployment.yml.bak
-                        git add ${GIT_REPO_NAME}/argo/deployment.yml
-                        git commit -m "Update deployment image to version ${buildNumber}"
-                        git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
-                    """
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    script {
+                        def buildNumber = env.BUILD_NUMBER
+                        sh """
+                            git config user.email "${GIT_USER_EMAIL}"
+                            git config user.name "${GIT_USER_NAME}"
+                            sed -i.bak 's/replaceImageTag/${buildNumber}/g' ${GIT_REPO_NAME}/argo/deployment.yml
+                            rm ${GIT_REPO_NAME}/argo/deployment.yml.bak
+                            git add ${GIT_REPO_NAME}/argo/deployment.yml
+                            git commit -m "Update deployment image to version ${buildNumber}"
+                            git push https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                        """
+                    }
                 }
             }
         }
