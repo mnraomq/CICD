@@ -71,9 +71,9 @@ pipeline {
         }
         stage('Update Deployment File') {
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'github-token')]) {  // Ensure 'github' matches the credentials ID in Jenkins
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {  // Ensure 'github' matches the credentials ID in Jenkins
                     script {
-                        echo "GITHUB_TOKEN: ${github-token}"
+                        echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
                         echo "GIT_USER_NAME: ${GIT_USER_NAME}"
                         echo "GIT_USER_EMAIL: ${GIT_USER_EMAIL}"
                     
@@ -85,7 +85,7 @@ pipeline {
                             rm ${GIT_REPO_NAME}/argo/deployment.yml.bak
                             git add ${GIT_REPO_NAME}/argo/deployment.yml
                             git commit -m "Update deployment image to version ${buildNumber}"
-                            git push https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                            git push https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                         """
                     }
                 }
