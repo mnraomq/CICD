@@ -73,23 +73,23 @@ pipeline {
                 GIT_USER_EMAIL = "mnraomq@gmail.com"
             }
             stage('Update Deployment File') {
-            steps {
-                withCredentials([string(credentialsId: 'github', variable: 'github-token')]) {  // Ensure 'github' matches the credentials ID in Jenkins
-                    script {
-                        echo "GITHUB_TOKEN: ${github-token}"
-                        echo "GIT_USER_NAME: ${GIT_USER_NAME}"
-                        echo "GIT_USER_EMAIL: ${GIT_USER_EMAIL}"
+                steps {
+                    withCredentials([string(credentialsId: 'github', variable: 'github-token')]) {  // Ensure 'github' matches the credentials ID in Jenkins
+                        script {
+                            echo "GITHUB_TOKEN: ${github-token}"
+                            echo "GIT_USER_NAME: ${GIT_USER_NAME}"
+                            echo "GIT_USER_EMAIL: ${GIT_USER_EMAIL}"
                         
-                        def buildNumber = env.BUILD_NUMBER
-                        sh """
-                            git config user.email "${GIT_USER_EMAIL}"
-                            git config user.name "${GIT_USER_NAME}"
-                            sed -i.bak 's/replaceImageTag/${buildNumber}/g' ${GIT_REPO_NAME}/argo/deployment.yml
-                            rm ${GIT_REPO_NAME}/argo/deployment.yml.bak
-                            git add ${GIT_REPO_NAME}/argo/deployment.yml
-                            git commit -m "Update deployment image to version ${buildNumber}"
-                            git push https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
-                        """
+                            def buildNumber = env.BUILD_NUMBER
+                            sh """
+                                git config user.email "${GIT_USER_EMAIL}"
+                                git config user.name "${GIT_USER_NAME}"
+                                sed -i.bak 's/replaceImageTag/${buildNumber}/g' ${GIT_REPO_NAME}/argo/deployment.yml
+                                rm ${GIT_REPO_NAME}/argo/deployment.yml.bak
+                                git add ${GIT_REPO_NAME}/argo/deployment.yml
+                                git commit -m "Update deployment image to version ${buildNumber}"
+                                git push https://${GIT_USER_NAME}:${github-token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                            """
                         }
                     }
                 }
