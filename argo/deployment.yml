@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Bookstore
+  name: bookstore
   labels:
-    app: Bookstore
+    app: bookstore
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: Bookstore
+      app: bookstore
   template:
     metadata:
       labels:
-        app: Bookstore
+        app: bookstore
     spec:
       containers:
-      - name: Bookstore
+      - name: bookstore
         image: mnraomq/bookstore
         ports:
         - containerPort: 8082
