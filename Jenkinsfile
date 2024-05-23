@@ -1,5 +1,11 @@
 pipeline {
     agent any
+
+    environment {
+                GIT_REPO_NAME = "CICD"
+                GIT_USER_NAME = "mnraomq"
+                GIT_USER_EMAIL = "mnraomq@gmail.com"
+            }
     
     tools {
         jdk 'jdk17'
@@ -67,12 +73,6 @@ pipeline {
             }
         }
         stage('Update Deployment File') {
-            environment {
-                GIT_REPO_NAME = "CICD"
-                GIT_USER_NAME = "mnraomq"
-                GIT_USER_EMAIL = "mnraomq@gmail.com"
-            }
-            stage('Update Deployment File') {
                 steps {
                     withCredentials([string(credentialsId: 'github', variable: 'github-token')]) {  // Ensure 'github' matches the credentials ID in Jenkins
                         script {
