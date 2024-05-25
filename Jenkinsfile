@@ -100,6 +100,7 @@ pipeline {
 
         stage('Update Deployment File') {
             steps {
+<<<<<<< HEAD
                 script {
                     if (env.GIT_BRANCH == 'origin/feature-branch') {
                         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
@@ -118,6 +119,24 @@ pipeline {
                                 git push https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                             """
                         }
+=======
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    script {
+                        echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
+                        echo "GIT_USER_NAME: ${GIT_USER_NAME}"
+                        echo "GIT_USER_EMAIL: ${GIT_USER_EMAIL}"
+                    
+                        def buildNumber = env.BUILD_NUMBER
+                        sh """
+                            git config user.email "${GIT_USER_EMAIL}"
+                            git config user.name "${GIT_USER_NAME}"
+                            sed -i.bak 's/replaceImageTag/${buildNumber}/g' argo/deployment.yml
+                            rm argo/deployment.yml.bak
+                            git add .scannerwork/
+                            git commit -m "Update deployment image to version ${buildNumber}"
+                            git push https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                        """
+>>>>>>> 0deaabed166e98f3af1888c194ffaa73c8db83db
                     }
                 }
             }
